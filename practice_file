@@ -1,0 +1,305 @@
+
+[root@node10 ~]# 
+[root@node10 ~]# 
+[root@node10 ~]# setenforce  0
+[root@node10 ~]# 
+[root@node10 ~]# systemctl   stop  firewalld
+[root@node10 ~]# systemctl  disable  firewalld
+Removed "/etc/systemd/system/multi-user.target.wants/firewalld.service".
+Removed "/etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service".
+[root@node10 ~]# 
+[root@node10 ~]# 
+[root@node10 ~]# 
+[root@node10 ~]# yum  install  python3  python3-pip  -y
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+this is my BaseOS repo file.                                                              94 MB/s | 2.0 MB     00:00    
+this is my AppStream repo file.                                                          139 MB/s | 7.2 MB     00:00    
+Package python3-3.9.19-8.el9.x86_64 is already installed.
+Dependencies resolved.
+=========================================================================================================================
+ Package                        Architecture              Version                           Repository              Size
+=========================================================================================================================
+Installing:
+ python3-pip                    noarch                    21.3.1-1.el9                      xyz                    2.0 M
+
+Transaction Summary
+=========================================================================================================================
+Install  1 Package
+
+Total size: 2.0 M
+Installed size: 8.8 M
+Downloading Packages:
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                 1/1 
+  Installing       : python3-pip-21.3.1-1.el9.noarch                                                                 1/1 
+  Running scriptlet: python3-pip-21.3.1-1.el9.noarch                                                                 1/1 
+  Verifying        : python3-pip-21.3.1-1.el9.noarch                                                                 1/1 
+Installed products updated.
+
+Installed:
+  python3-pip-21.3.1-1.el9.noarch                                                                                        
+
+Complete!
+[root@node10 ~]# 
+[root@node10 ~]# 
+[root@node10 ~]# mkdir   mypythonproject
+[root@node10 ~]# cd  mypythonproject/
+[root@node10 mypythonproject]# 
+[root@node10 mypythonproject]# 
+[root@node10 mypythonproject]# python3 -m venv venv
+[root@node10 mypythonproject]# source venv/bin/activate
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# vim  app.py
+(venv) [root@node10 mypythonproject]# pip install Flask
+Collecting Flask
+  Downloading flask-3.1.0-py3-none-any.whl (102 kB)
+     |████████████████████████████████| 102 kB 994 kB/s            
+Collecting Jinja2>=3.1.2
+  Downloading jinja2-3.1.5-py3-none-any.whl (134 kB)
+     |████████████████████████████████| 134 kB 2.0 MB/s            
+Collecting Werkzeug>=3.1
+  Downloading werkzeug-3.1.3-py3-none-any.whl (224 kB)
+     |████████████████████████████████| 224 kB 11.3 MB/s            
+Collecting blinker>=1.9
+  Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Collecting importlib-metadata>=3.6
+  Downloading importlib_metadata-8.6.1-py3-none-any.whl (26 kB)
+Collecting itsdangerous>=2.2
+  Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Collecting click>=8.1.3
+  Downloading click-8.1.8-py3-none-any.whl (98 kB)
+     |████████████████████████████████| 98 kB 6.1 MB/s             
+Collecting zipp>=3.20
+  Downloading zipp-3.21.0-py3-none-any.whl (9.6 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-3.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (20 kB)
+Installing collected packages: zipp, MarkupSafe, Werkzeug, Jinja2, itsdangerous, importlib-metadata, click, blinker, Flask
+Successfully installed Flask-3.1.0 Jinja2-3.1.5 MarkupSafe-3.0.2 Werkzeug-3.1.3 blinker-1.9.0 click-8.1.8 importlib-metadata-8.6.1 itsdangerous-2.2.0 zipp-3.21.0
+WARNING: You are using pip version 21.3.1; however, version 25.0 is available.
+You should consider upgrading via the '/root/mypythonproject/venv/bin/python3 -m pip install --upgrade pip' command.
+(venv) [root@node10 mypythonproject]# python3 -m pip install --upgrade pip
+Requirement already satisfied: pip in ./venv/lib/python3.9/site-packages (21.3.1)
+Collecting pip
+  Downloading pip-25.0-py3-none-any.whl (1.8 MB)
+     |████████████████████████████████| 1.8 MB 831 kB/s            
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.3.1
+    Uninstalling pip-21.3.1:
+      Successfully uninstalled pip-21.3.1
+Successfully installed pip-25.0
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# pip install gunicorn
+Collecting gunicorn
+  Downloading gunicorn-23.0.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting packaging (from gunicorn)
+  Downloading packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+Downloading gunicorn-23.0.0-py3-none-any.whl (85 kB)
+Downloading packaging-24.2-py3-none-any.whl (65 kB)
+Installing collected packages: packaging, gunicorn
+Successfully installed gunicorn-23.0.0 packaging-24.2
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# python app.py
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+Press CTRL+C to quit
+192.168.1.8 - - [02/Feb/2025 06:35:38] "GET / HTTP/1.1" 200 -
+^C(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# gunicorn --bind 0.0.0.0:5000 app:app
+[2025-02-02 06:36:01 +0530] [7708] [INFO] Starting gunicorn 23.0.0
+[2025-02-02 06:36:01 +0530] [7708] [INFO] Listening at: http://0.0.0.0:5000 (7708)
+[2025-02-02 06:36:01 +0530] [7708] [INFO] Using worker: sync
+[2025-02-02 06:36:01 +0530] [7709] [INFO] Booting worker with pid: 7709
+^C[2025-02-02 06:36:08 +0530] [7708] [INFO] Handling signal: int
+[2025-02-02 06:36:08 +0530] [7709] [INFO] Worker exiting (pid: 7709)
+[2025-02-02 06:36:08 +0530] [7708] [INFO] Shutting down: Master
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# chmod 700 /root
+(venv) [root@node10 mypythonproject]# chmod -R 755 /root/mypythonproject/venv
+(venv) [root@node10 mypythonproject]# chown root:root /root/mypythonproject/venv/bin/gunicorn
+(venv) [root@node10 mypythonproject]# chown -R root:root /root/mypythonproject
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# vim   /etc/systemd/system/myflaskapp.service
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# chmod -x   /etc/systemd/system/myflaskapp.service
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl   daemon-reload 
+(venv) [root@node10 mypythonproject]# systemctl   start  myflaskapp
+(venv) [root@node10 mypythonproject]# systemctl  enable  myflaskapp
+Created symlink /etc/systemd/system/multi-user.target.wants/myflaskapp.service → /etc/systemd/system/myflaskapp.service.
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl  status  myflaskapp
+● myflaskapp.service - Gunicorn instance to serve my Flask app
+     Loaded: loaded (/etc/systemd/system/myflaskapp.service; enabled; preset: disabled)
+     Active: active (running) since Sun 2025-02-02 06:39:16 IST; 16s ago
+   Main PID: 7837 (gunicorn)
+      Tasks: 4 (limit: 10740)
+     Memory: 52.0M
+        CPU: 541ms
+     CGroup: /system.slice/myflaskapp.service
+             ├─7837 /root/mypythonproject/venv/bin/python3 /root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.>
+             ├─7843 /root/mypythonproject/venv/bin/python3 /root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.>
+             ├─7844 /root/mypythonproject/venv/bin/python3 /root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.>
+             └─7845 /root/mypythonproject/venv/bin/python3 /root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.>
+
+Feb 02 06:39:16 node10.example.com systemd[1]: Started Gunicorn instance to serve my Flask app.
+Feb 02 06:39:16 node10.example.com gunicorn[7837]: [2025-02-02 06:39:16 +0530] [7837] [INFO] Starting gunicorn 23.0.0
+Feb 02 06:39:16 node10.example.com gunicorn[7837]: [2025-02-02 06:39:16 +0530] [7837] [INFO] Listening at: http://0.0.0.>
+Feb 02 06:39:16 node10.example.com gunicorn[7837]: [2025-02-02 06:39:16 +0530] [7837] [INFO] Using worker: sync
+Feb 02 06:39:16 node10.example.com gunicorn[7843]: [2025-02-02 06:39:16 +0530] [7843] [INFO] Booting worker with pid: 78>
+Feb 02 06:39:16 node10.example.com gunicorn[7844]: [2025-02-02 06:39:16 +0530] [7844] [INFO] Booting worker with pid: 78>
+Feb 02 06:39:16 node10.example.com gunicorn[7845]: [2025-02-02 06:39:16 +0530] [7845] [INFO] Booting worker with pid: 78>
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# yum  install   nginx  -y
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:01:07 ago on Sun 02 Feb 2025 06:39:25 AM IST.
+Dependencies resolved.
+=========================================================================================================================
+ Package                             Architecture            Version                          Repository            Size
+=========================================================================================================================
+Installing:
+ nginx                               x86_64                  2:1.20.1-20.el9                  xyz                   40 k
+Installing dependencies:
+ nginx-core                          x86_64                  2:1.20.1-20.el9                  xyz                  574 k
+ nginx-filesystem                    noarch                  2:1.20.1-20.el9                  xyz                   11 k
+ redhat-logos-httpd                  noarch                  90.4-2.el9                       xyz                   18 k
+
+Transaction Summary
+=========================================================================================================================
+Install  4 Packages
+
+Total size: 643 k
+Installed size: 1.8 M
+Downloading Packages:
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                 1/1 
+  Running scriptlet: nginx-filesystem-2:1.20.1-20.el9.noarch                                                         1/4 
+  Installing       : nginx-filesystem-2:1.20.1-20.el9.noarch                                                         1/4 
+  Installing       : nginx-core-2:1.20.1-20.el9.x86_64                                                               2/4 
+  Installing       : redhat-logos-httpd-90.4-2.el9.noarch                                                            3/4 
+  Installing       : nginx-2:1.20.1-20.el9.x86_64                                                                    4/4 
+  Running scriptlet: nginx-2:1.20.1-20.el9.x86_64                                                                    4/4 
+  Verifying        : nginx-2:1.20.1-20.el9.x86_64                                                                    1/4 
+  Verifying        : nginx-core-2:1.20.1-20.el9.x86_64                                                               2/4 
+  Verifying        : nginx-filesystem-2:1.20.1-20.el9.noarch                                                         3/4 
+  Verifying        : redhat-logos-httpd-90.4-2.el9.noarch                                                            4/4 
+Installed products updated.
+
+Installed:
+  nginx-2:1.20.1-20.el9.x86_64            nginx-core-2:1.20.1-20.el9.x86_64    nginx-filesystem-2:1.20.1-20.el9.noarch   
+  redhat-logos-httpd-90.4-2.el9.noarch   
+
+Complete!
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl    start   nginx
+(venv) [root@node10 mypythonproject]# systemctl   enable   nginx
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /usr/lib/systemd/system/nginx.service.
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# vim   /etc/nginx/nginx.conf
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl    restart    nginx
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl   start   firewalld
+(venv) [root@node10 mypythonproject]# systemctl   enable   firewalld
+Created symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service → /usr/lib/systemd/system/firewalld.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/firewalld.service → /usr/lib/systemd/system/firewalld.service.
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# systemctl    start   httpd
+Failed to start httpd.service: Unit httpd.service not found.
+(venv) [root@node10 mypythonproject]# systemctl    start   nginx
+(venv) [root@node10 mypythonproject]# systemctl   enable   nginx
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# firewall-cmd    --permanent   --zone=public   --add-port=80/tcp
+success
+(venv) [root@node10 mypythonproject]# firewall-cmd   --relo
+success
+(venv) [root@node10 mypythonproject]# firewall-cmd   --reload 
+success
+(venv) [root@node10 mypythonproject]# 
+
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# 
+(venv) [root@node10 mypythonproject]# history
+    1  setenforce  0
+    2  systemctl   stop  firewalld
+    3  systemctl  disable  firewalld
+    4  yum  install  python3  python3-pip  -y
+    5  mkdir   mypythonproject
+    6  cd  mypythonproject/
+    7  python3 -m venv venv
+    8  source venv/bin/activate
+    9  vim  app.py
+   10  pip install Flask
+   11  python3 -m pip install --upgrade pip
+   12  pip install gunicorn
+   13  python app.py
+   14  gunicorn --bind 0.0.0.0:5000 app:app
+   15  chmod 700 /root
+   16  chmod -R 755 /root/mypythonproject/venv
+   17  chown root:root /root/mypythonproject/venv/bin/gunicorn
+   18  chown -R root:root /root/mypythonproject
+   19  vim   /etc/systemd/system/myflaskapp.service
+   20  chmod -x   /etc/systemd/system/myflaskapp.service
+   21  systemctl   daemon-reload 
+   22  systemctl   start  myflaskapp
+   23  systemctl  enable  myflaskapp
+   24  systemctl  status  myflaskapp
+   25  yum  install   nginx  -y
+   26  systemctl    start   nginx
+   27  systemctl   enable   nginx
+   28  vim   /etc/nginx/nginx.conf
+   29  nginx -t
+   30  systemctl    restart    nginx
+   31  systemctl   start  firewalld
+   32  systemctl  enable firewalld
+   31  history
+(venv) [root@node10 mypythonproject]# 
