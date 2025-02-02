@@ -59,6 +59,22 @@ Complete!
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# vim  app.py
+
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, World! This is my Python project running on Red Hat 8."
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
+:wq!
+
+
 (venv) [root@node10 mypythonproject]# pip install Flask
 Collecting Flask
   Downloading flask-3.1.0-py3-none-any.whl (102 kB)
@@ -143,6 +159,26 @@ Press CTRL+C to quit
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# vim   /etc/systemd/system/myflaskapp.service
+
+
+[Unit]
+Description=Gunicorn instance to serve my Flask app
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/mypythonproject
+ExecStart=/root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:5000 app:app
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+:wq!
+
+
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# chmod -x   /etc/systemd/system/myflaskapp.service
 (venv) [root@node10 mypythonproject]# 
@@ -237,6 +273,24 @@ Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /u
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# vim   /etc/nginx/nginx.conf
+
+server {
+    listen 80;
+    server_name your_domain_or_ip;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+
+:wq!
+
+
 (venv) [root@node10 mypythonproject]# 
 (venv) [root@node10 mypythonproject]# nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
