@@ -357,3 +357,205 @@ success
    32  systemctl  enable firewalld
    31  history
 (venv) [root@node10 mypythonproject]# 
+
+
+
+
+
+===============================================================================================
+
+Notes for Your Python Project [Here is more detail about project from above notes.]
+
+===============================================================================================
+1. Environment Setup
+#### Disable SELinux: ####
+
+setenforce 0
+
+#### Stop and Disable Firewall: ####
+
+systemctl stop firewalld
+systemctl disable firewalld
+
+
+
+2. Install Python and Pip
+
+#### Install Python 3 and Pip:####
+
+yum install python3 python3-pip -y
+
+#### Verify Python 3 installation: ####
+
+python3 --version
+
+
+
+
+3. Create Project Directory
+#### Create a directory for your Python project: ####
+
+mkdir mypythonproject
+cd mypythonproject
+
+
+
+
+4. Set Up Virtual Environment
+#### Create a virtual environment: ####
+
+
+python3 -m venv venv
+
+#### Activate the virtual environment: ####
+
+
+source venv/bin/activate
+
+
+
+
+5. Create Flask Application
+#### Create a Flask app (app.py): ####
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, World! This is my Python project running on Red Hat 8."
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
+
+:wq!
+
+
+6. Install Flask and Gunicorn
+#### Install Flask: ####
+
+pip install Flask
+
+#### Upgrade Pip: ####
+
+python3 -m pip install --upgrade pip
+
+#### Install Gunicorn: ####
+
+
+pip install gunicorn
+
+
+
+
+7. Run Flask Application
+#### Run the Flask app using the development server: ####
+
+
+python app.py
+
+#### Run the Flask app using Gunicorn: ####
+
+
+gunicorn --bind 0.0.0.0:5000 app:app
+
+
+
+
+8. Set Up Systemd Service
+
+#### Create a systemd service file (/etc/systemd/system/myflaskapp.service): ####
+
+[Unit]
+Description=Gunicorn instance to serve my Flask app
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/mypythonproject
+ExecStart=/root/mypythonproject/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:5000 app:app
+
+[Install]
+WantedBy=multi-user.target
+
+:wq!
+
+#### Reload systemd and start the service:####
+
+
+systemctl daemon-reload
+systemctl start myflaskapp
+systemctl enable myflaskapp
+
+#### Check the status of the service: ####
+
+systemctl status myflaskapp
+
+
+
+
+9. Install and Configure Nginx
+#### Install Nginx: ####
+
+yum install nginx -y
+
+#### Start and enable Nginx: ####
+
+systemctl start nginx
+systemctl enable nginx
+
+
+#### Configure Nginx to proxy requests to the Flask app: ####
+
+Edit /etc/nginx/nginx.conf:
+
+nginx
+Copy
+server {
+    listen 80;
+    server_name your_domain_or_ip;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+#### Test Nginx configuration and restart:####
+
+nginx -t
+systemctl restart nginx
+
+
+
+
+10. Re-enable Firewall and Open Ports
+#### Start and enable Firewall: ####
+
+
+systemctl start firewalld
+systemctl enable firewalld
+
+#### Open port 80 for HTTP traffic: ####
+
+
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --reload
+
+
+11. Verify Setup
+
+#### Ensure the Flask app is running and accessible via Nginx on port 80. ####
+
+
+12. History of Commands
+
+#### Review the history of commands executed: ####
+
+history
