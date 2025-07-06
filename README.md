@@ -21,6 +21,8 @@ Copy
 Edit
 systemctl stop firewalld
 systemctl disable firewalld
+
+
 🐍 2. Install Python and Pip
 Install Python 3 and Pip:
 bash
@@ -32,12 +34,16 @@ bash
 Copy
 Edit
 python3 --version
+
+
 📁 3. Create Project Directory
 bash
 Copy
 Edit
 mkdir mypythonproject
 cd mypythonproject
+
+
 🔒 4. Set Up Virtual Environment
 Create and Activate Virtual Environment:
 bash
@@ -45,6 +51,8 @@ Copy
 Edit
 python3 -m venv venv
 source venv/bin/activate
+
+
 🌐 5. Create Flask Application
 Create a file named app.py with the following content:
 
@@ -61,6 +69,8 @@ def home():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
+
 📦 6. Install Flask and Gunicorn
 Install Flask:
 bash
@@ -77,6 +87,8 @@ bash
 Copy
 Edit
 pip install gunicorn
+
+
 ▶️ 7. Run Flask Application
 Development Server (for testing):
 bash
@@ -88,6 +100,8 @@ bash
 Copy
 Edit
 gunicorn --bind 0.0.0.0:5000 app:app
+
+
 ⚙️ 8. Set Up systemd Service
 Create a file at /etc/systemd/system/myflaskapp.service:
 
@@ -118,6 +132,8 @@ bash
 Copy
 Edit
 systemctl status myflaskapp
+
+
 🌐 9. Install and Configure Nginx
 Install Nginx:
 bash
@@ -154,6 +170,8 @@ Copy
 Edit
 nginx -t
 systemctl restart nginx
+
+
 🔐 10. Re-enable Firewall and Open Ports
 Start and Enable Firewall:
 bash
@@ -167,10 +185,13 @@ Copy
 Edit
 firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --reload
+
+
 ✅ 11. Verify Setup
 Open a browser and visit http://your_domain_or_ip to see the message:
 
 Hello, World! This is my Python project running on Red Hat 8.
+
 
 🕒 12. Command History
 To review your shell command history:
